@@ -1,0 +1,88 @@
+{
+  "name": "sample-dubstep-two",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/sample-dubstep-two/src",
+  "prefix": "sample-dubstep-two",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/sample-dubstep-two",
+        "index": "apps/sample-dubstep-two/src/index.html",
+        "main": "apps/sample-dubstep-two/src/main.ts",
+        "polyfills": "apps/sample-dubstep-two/src/polyfills.ts",
+        "tsConfig": "apps/sample-dubstep-two/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/sample-dubstep-two/src/favicon.ico",
+          "apps/sample-dubstep-two/src/assets"
+        ],
+        "styles": ["apps/sample-dubstep-two/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/sample-dubstep-two/src/environments/environment.ts",
+              "with": "apps/sample-dubstep-two/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "sample-dubstep-two:build:production"
+        },
+        "development": {
+          "buildTarget": "sample-dubstep-two:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "sample-dubstep-two:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/sample-dubstep-two"],
+      "options": {
+        "jestConfig": "apps/sample-dubstep-two/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}
